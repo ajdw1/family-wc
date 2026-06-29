@@ -258,12 +258,11 @@ function render(){
 }
 function viewHome(){
   var stats=[["48","teams"],["12","groups"],["72","group matches"],["104","matches total"]].map(function(s){return '<div class="stat"><div class="n">'+s[0]+'</div><div class="muted" style="font-size:13px">'+s[1]+'</div></div>';}).join("");
-  var showName = !groupLocked() || (koReady() && !koLocked());
-  var label = (groupLocked() && koReady()) ? "Continue to my bracket ›" : "Start tipping ›";
-  var ph = (groupLocked() && koReady()) ? "Your name (same as Stage 1)" : "Your name";
+  var label = groupLocked() ? "Continue ›" : "Start tipping ›";
+  var ph = groupLocked() ? "Your name (same as before)" : "Your name";
   var nameBox = '<div class="row" style="flex-wrap:wrap;max-width:480px"><input id="nameInput" class="field" style="flex:1 1 220px" placeholder="'+ph+'" value="'+esc(S.name)+'"><button class="btn primary" data-action="start">'+label+'</button></div>'
     + '<div style="margin-top:10px"><button class="btn dark sm" data-action="nav-board">View leaderboard</button></div>';
-  var entry = showName ? nameBox : '<button class="btn dark" data-action="nav-board">View the leaderboard</button>';
+  var entry = nameBox;
   return '<div class="anton" style="font-size:50px;line-height:.95;margin-bottom:8px">TWO STAGES.<br>ONE <span style="color:var(--lime)">CHAMPION.</span></div>'
     + '<div class="muted" style="font-size:15px;max-width:580px;margin-bottom:14px">Stage 1: pick the winner of all 72 group matches before kick-off. Stage 2: once the real groups finish, the knockout bracket unlocks with the actual qualifiers — pick your way to the champion.</div>'
     + (koReady()?'<div class="notice ok" style="display:inline-flex">🔓 Knockouts are OPEN — enter your name to pick your bracket</div>':'<div class="notice info" style="display:inline-flex">Knockouts unlock after the group stage</div>')
